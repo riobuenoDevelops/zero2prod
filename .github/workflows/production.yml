@@ -1,0 +1,12 @@
+name: Newsletter System - Production
+run-name: ${{ github.actor }} build ${{ github.sha }}
+on: [push]
+jobs:
+  Build-for-production:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cargo test
+      - run: cargo tarpaulin --ignore-tests
+      - run: cargo clippy -- -D warnings
+      - run: cargo fmt
+      - run: cargo audit
